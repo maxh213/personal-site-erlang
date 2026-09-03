@@ -9,7 +9,7 @@
 
 -behaviour(cowboy_handler).
 
--export([init/2]).
+-export([init/2, page_html/0]).
 
 init(Req0, State) ->
     Body = page_html(),
