@@ -25,8 +25,9 @@ Start the application with an interactive shell:
 rebar3 shell
 ```
 
-Then open <http://localhost:8080/> — the server responds with a
-simple "Hello — CV site coming soon" HTML page.
+Then open <http://localhost:8080/> — the server responds with the
+full CV page, rendered server-side from the content in
+`src/personal_site_cv.erl`.
 
 The listening port defaults to `8080`. To use a different port,
 start the shell with an override:
@@ -43,7 +44,11 @@ rebar3 shell --eval 'application:set_env(personal_site, port, 9090).'
 | `src/personal_site_app.erl`  | OTP application callback: starts the top-level supervisor.  |
 | `src/personal_site_sup.erl`  | Top-level supervisor; owns the Cowboy listener child.       |
 | `src/personal_site_router.erl` | Builds the Cowboy dispatch route table.                   |
-| `src/personal_site_root_handler.erl` | Cowboy handler for `GET /`, returns the landing page HTML. |
+| `src/personal_site_cv.erl`   | CV content data (placeholder values; edit to publish a real CV). |
+| `src/personal_site_cv_handler.erl` | Cowboy handler for `GET /`, renders the CV page HTML from the data module. |
 
 New routes are added to `personal_site_router:routes/0` without
-touching the listener wiring in the supervisor.
+touching the listener wiring in the supervisor. The CV page's
+sections carry stable ids (`summary`, `experience`, `skills`,
+`education`, `contact`) so stylesheets and future content swaps
+attach to a fixed structure.
