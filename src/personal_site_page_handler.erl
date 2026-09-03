@@ -39,6 +39,7 @@ render() ->
         "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n",
         "  <title>", escape(Name), " - ", escape(Title), "</title>\n",
         "  <link rel=\"stylesheet\" href=\"/css/style.css\">\n",
+        "  <link rel=\"icon\" type=\"image/svg+xml\" href=\"/favicon.svg\">\n",
         "</head>\n",
         "<body>\n",
         "  <header>\n",
