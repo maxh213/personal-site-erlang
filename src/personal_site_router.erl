@@ -4,5 +4,5 @@
 
 routes() ->
     [{'_', [
-        {"/", personal_site_root_handler, []}
+        {"/", personal_site_page_handler, []}
     ]}].
