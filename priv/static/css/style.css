@@ -1,0 +1,448 @@
+/*
+ * Personal CV site stylesheet.
+ *
+ * Plain CSS, no frameworks, no build step. The selectors below match the
+ * semantic ids/classes emitted by src/personal_site_cv_handler.erl:
+ * header.cv-header, #summary, #experience + .experience-entry,
+ * #skills + .skills-list, #education + .education-entry, #contact.
+ */
+
+:root {
+    --color-bg: #f4f6f8;
+    --color-surface: #ffffff;
+    --color-text: #2a3340;
+    --color-heading: #182230;
+    --color-muted: #5c6a7a;
+    --color-accent: #1b5f9c;
+    --color-accent-dark: #12497c;
+    --color-accent-soft: #e7f0f8;
+    --color-accent-line: #c9dcec;
+    --color-border: #dbe1e8;
+    --color-shadow: rgba(24, 34, 48, 0.08);
+    --radius: 10px;
+    --max-width: 52rem;
+    --space-section: 2.5rem;
+}
+
+/* ---- Base ------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    font-size: 1rem;
+    line-height: 1.65;
+    overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+    margin: 0;
+}
+
+h1,
+h2,
+h3 {
+    color: var(--color-heading);
+    line-height: 1.25;
+    text-wrap: balance;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+    color: var(--color-accent-dark);
+    text-decoration: underline;
+}
+
+/* ---- Header ----------------------------------------------------------- */
+
+.cv-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 1px 6px var(--color-shadow);
+    text-align: center;
+    padding: 1.1rem 1rem 0.95rem;
+    backdrop-filter: saturate(160%) blur(6px);
+}
+
+.cv-header h1 {
+    font-size: 1.9rem;
+    letter-spacing: 0.01em;
+}
+
+.cv-header .job-title {
+    margin-top: 0.25rem;
+    color: var(--color-accent);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* ---- Layout ----------------------------------------------------------- */
+
+main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-section) 1.25rem 4rem;
+    display: grid;
+    gap: var(--space-section);
+}
+
+/* ---- Section headings ------------------------------------------------- */
+
+section > h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1.1rem;
+}
+
+section > h2::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(to right, var(--color-accent-line), transparent);
+}
+
+/* ---- Summary / About -------------------------------------------------- */
+
+.summary {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-accent);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.75rem;
+    box-shadow: 0 1px 4px var(--color-shadow);
+}
+
+.summary > h2 {
+    margin-bottom: 0.75rem;
+}
+
+.summary > h2::after {
+    display: none;
+}
+
+.summary p {
+    font-size: 1.05rem;
+}
+
+/* ---- Experience ------------------------------------------------------- */
+
+.experience {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.experience > h2 {
+    margin-bottom: 0;
+}
+
+.experience-entry {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.4rem 1.6rem;
+    box-shadow: 0 1px 4px var(--color-shadow);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 1.25rem;
+    row-gap: 0.35rem;
+}
+
+.experience-entry h3 {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 1.15rem;
+}
+
+.experience-entry .company {
+    grid-column: 1;
+    grid-row: 2;
+    font-weight: 600;
+}
+
+.experience-entry .dates {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: start;
+    justify-self: end;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    border: 1px solid var(--color-accent-line);
+    background: var(--color-accent-soft);
+    color: var(--color-accent-dark);
+    border-radius: 999px;
+    padding: 0.15rem 0.8rem;
+    margin-top: 0.2rem;
+}
+
+.experience-entry ul {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    margin-top: 0.6rem;
+    display: grid;
+    gap: 0.4rem;
+}
+
+.experience-entry li {
+    position: relative;
+    padding-left: 1.35rem;
+}
+
+.experience-entry li::before {
+    content: "";
+    position: absolute;
+    left: 0.1rem;
+    top: 0.62em;
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    background: var(--color-accent);
+    opacity: 0.7;
+}
+
+/* ---- Skills ----------------------------------------------------------- */
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+}
+
+.skills-list li {
+    background: var(--color-accent-soft);
+    border: 1px solid var(--color-accent-line);
+    border-radius: 999px;
+    color: var(--color-accent-dark);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.35rem 0.9rem;
+}
+
+/* ---- Education -------------------------------------------------------- */
+
+.education {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.education > h2 {
+    margin-bottom: 0;
+}
+
+.education-entry {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.6rem;
+    box-shadow: 0 1px 4px var(--color-shadow);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 1.25rem;
+    row-gap: 0.25rem;
+    align-items: start;
+}
+
+.education-entry h3 {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 1.05rem;
+}
+
+.education-entry .dates {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    justify-self: end;
+    color: var(--color-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.education-entry .institution {
+    grid-column: 1;
+    grid-row: 2;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+}
+
+/* ---- Contact ---------------------------------------------------------- */
+
+.contact-email {
+    font-size: 1.02rem;
+}
+
+/* ---- Responsive: narrow screens --------------------------------------- */
+
+@media (max-width: 640px) {
+    .cv-header h1 {
+        font-size: 1.55rem;
+    }
+
+    .cv-header .job-title {
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+    }
+
+    main {
+        padding: 1.75rem 1rem 3rem;
+        gap: 1.75rem;
+        --space-section: 1.75rem;
+    }
+
+    .summary {
+        padding: 1.15rem 1.25rem;
+    }
+
+    .experience-entry,
+    .education-entry {
+        grid-template-columns: 1fr;
+        padding: 1.15rem 1.25rem;
+    }
+
+    .experience-entry h3,
+    .experience-entry .company,
+    .experience-entry .dates,
+    .experience-entry ul,
+    .education-entry h3,
+    .education-entry .institution,
+    .education-entry .dates {
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    .experience-entry .dates,
+    .education-entry .dates {
+        justify-self: start;
+        white-space: normal;
+    }
+
+    .experience-entry .dates {
+        margin-top: 0;
+    }
+
+    .experience-entry ul {
+        margin-top: 0.6rem;
+    }
+}
+
+/* ---- Print ------------------------------------------------------------ */
+
+@media print {
+    @page {
+        margin: 1.5cm;
+    }
+
+    :root {
+        --color-bg: #ffffff;
+        --color-surface: #ffffff;
+        --color-text: #000000;
+        --color-heading: #000000;
+        --color-muted: #333333;
+        --color-accent: #000000;
+        --color-accent-dark: #000000;
+        --color-accent-soft: #f2f2f2;
+        --color-accent-line: #cccccc;
+        --color-border: #999999;
+        --color-shadow: transparent;
+    }
+
+    body {
+        background: #ffffff;
+        font-size: 11pt;
+        line-height: 1.5;
+    }
+
+    .cv-header {
+        position: static;
+        background: #ffffff;
+        border-bottom: 2px solid #000000;
+        box-shadow: none;
+        backdrop-filter: none;
+        padding: 0 0 0.75rem;
+        text-align: left;
+    }
+
+    .cv-header h1 {
+        font-size: 20pt;
+    }
+
+    .cv-header .job-title {
+        color: #000000;
+        font-size: 10pt;
+    }
+
+    main {
+        max-width: none;
+        padding: 1.25rem 0 0;
+        display: block;
+    }
+
+    section {
+        margin-bottom: 1.25rem;
+    }
+
+    .summary,
+    .experience-entry,
+    .education-entry {
+        box-shadow: none;
+        background: #ffffff;
+        page-break-inside: avoid;
+    }
+
+    .experience-entry li::before {
+        background: #000000;
+    }
+
+    .skills-list li {
+        background: #f2f2f2;
+        border-color: #cccccc;
+        color: #000000;
+    }
+
+    a {
+        color: #000000;
+        text-decoration: underline;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
