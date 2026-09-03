@@ -1,0 +1,15 @@
+{application, personal_site, [
+    {description, "Personal CV website served by Erlang and Cowboy"},
+    {vsn, "0.1.0"},
+    {registered, []},
+    {mod, {personal_site_app, []}},
+    {applications, [
+        kernel,
+        stdlib,
+        cowboy
+    ]},
+    {env, [
+        {port, 8080}
+    ]},
+    {licenses, ["MIT"]}
+]}.
